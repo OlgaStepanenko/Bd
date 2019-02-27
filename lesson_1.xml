@@ -1,0 +1,202 @@
+CREATE SCHEMA `bd_lesson_1` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE `bd_lesson_1`.`country` (
+
+  `id` INT NOT NULL AUTO_INCREMENT,
+
+  `country` VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY (`id`))
+
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+
+CREATE TABLE `bd_lesson_1`.`cities` (
+
+  `id_cities` INT NOT NULL AUTO_INCREMENT,
+
+  `id_country` INT NOT NULL,
+
+  `city` VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY (`id_cities`))
+
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+CREATE TABLE `bd_lesson_1`.`streets` (
+
+  `id_streets` INT NOT NULL AUTO_INCREMENT,
+
+  `id_cities` INT NOT NULL,
+
+  `street` VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY (`id_streets`))
+
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+ALTER TABLE `bd_lesson_1`.`country`
+ 
+CHANGE COLUMN `id` `id_country` INT(11) NOT NULL AUTO_INCREMENT ;
+
+
+
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Россия');
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Италия');
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Румыния');
+
+
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Украина');
+
+
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Швеция');
+
+
+INSERT INTO bd_lesson_1.`country` (country) VALUES ('Франция');
+
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('1', 'Санкт-Петербург');
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('2', 'Милан');
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('3', 'Брашов');
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('4', 'Одесса');
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('5', 'Гётеборг');
+
+INSERT INTO bd_lesson_1.`cities` (id_country, city) VALUES ('6', 'Ницца');
+
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('1', 'пр.Луначарского');
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('2', 'ул.Данте');
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('3', 'ул.Республики');
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('4', 'ул.Ветвистая');
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('5', 'ул.Авенюн');
+
+INSERT INTO bd_lesson_1.`streets` (id_cities, street) VALUES ('6', 'Rue Delille');
+
+
+
+
+
+CREATE TABLE `bd_lesson_1`.`world` (
+
+  `id` INT NOT NULL AUTO_INCREMENT,
+
+  `id_country` INT NOT NULL,
+
+  `id_cities` INT NOT NULL,
+
+  `id_streets` INT NOT NULL,
+
+  PRIMARY KEY (`id`))
+
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = utf8;
+
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD INDEX `fk_world_country_idx` (`id_country` ASC) VISIBLE;
+
+;
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD CONSTRAINT `fk_world_country`
+
+  FOREIGN KEY (`id_country`)
+
+  REFERENCES `bd_lesson_1`.`country` (`id_country`)
+
+  ON DELETE NO ACTION
+
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+DROP FOREIGN KEY `fk_world_country`;
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD CONSTRAINT `fk_world_country`
+
+  FOREIGN KEY (`id_country`)
+
+  REFERENCES `bd_lesson_1`.`country` (`id_country`)
+
+  ON DELETE CASCADE;
+
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD INDEX `fk_world_sities_idx` (`id_cities` ASC) VISIBLE;
+
+;
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD CONSTRAINT `fk_world_sities`
+
+  FOREIGN KEY (`id_cities`)
+
+  REFERENCES `bd_lesson_1`.`cities` (`id_cities`)
+
+  ON DELETE CASCADE
+
+  ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD INDEX `fk_world_streets_idx` (`id_ctreets` ASC) VISIBLE;
+
+;
+
+ALTER TABLE `bd_lesson_1`.`world`
+ 
+ADD CONSTRAINT `fk_world_streets`
+
+  FOREIGN KEY (`id_ctreets`)
+
+  REFERENCES `bd_lesson_1`.`streets` (`id_streets`)
+
+  ON DELETE CASCADE
+
+  ON UPDATE NO ACTION;
+
+
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('1', '1', '1');
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('2', '2', '2');
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('3', '3', '3');
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('4', '4', '4');
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('5', '5', '5');
+
+INSERT INTO bd_lesson_1.`world` (id_country, id_cities, id_streets) VALUES ('6', '6', '6');
+
+
+
+
+
+
+
+
