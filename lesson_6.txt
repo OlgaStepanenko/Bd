@@ -1,0 +1,40 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bd_lesson_1        |
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| shop               |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> -u root -p
+    -> mysql> GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' INDENTIFIED BY 'password'; FLUSH PRIVELEGES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-u root -p
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' INDENTIFIED' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIVELEGES' at line 1
+mysql> USE bd_lesson_1;
+Database changed
+mysql> FLASH TABLES WHITH READ LOCK;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FLASH TABLES WHITH READ LOCK' at line 1
+mysql> SHOW MASTER STATUS;
++----------------------------+----------+--------------+------------------+-------------------+
+| File                       | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++----------------------------+----------+--------------+------------------+-------------------+
+| DESKTOP-5JNR8Q2-bin.000007 |      155 |              |                  |                   |
++----------------------------+----------+--------------+------------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> mysqldump -u root -p newdatabase > newdatabase.sql
+    -> UNLOCK TABLES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysqldump -u root -p newdatabase > newdatabase.sql
+UNLOCK TABLES' at line 1
+mysql>
+
+
