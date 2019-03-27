@@ -1,0 +1,11 @@
+CREATE TYPE wine AS ( wine_vineyard varchar(50), wine_type varchar(50), wine_year int );
+
+CREATE TABLE pairings ( menu_entree varchar(50), wine_pairing wine );
+
+INSERT INTO pairings VALUES ('Lobster Tail',ROW('Stag''s Leap','Chardonnay', 2012)), ('Elk Medallions',ROW('Rombauer','Cabernet Sauvignon',2012));
+
+SELECT (wine_pairing).wine_vineyard, (wine_pairing).wine_type FROM pairings WHERE menu_entree = 'Elk Medallions';
+
+1  "Rombauer"	"Cabernet Sauvignon"
+
+
